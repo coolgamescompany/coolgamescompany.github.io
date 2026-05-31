@@ -818,26 +818,140 @@
       .featured-inner { flex-direction: column; text-align: center; }
       .character-left, .character-right { width: 80px; opacity: 0.2; }
     }
-    @media (max-width: 768px) {
-      .nav-toggle { display: block; }
-      .primary-nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background: #d10000;
-        border-left: 3px solid #222;
-        padding: 100px 30px;
-        transition: right 0.3s;
-        z-index: 1001;
-      }
-      .primary-nav.open { right: 0; }
-      .primary-nav ul { flex-direction: column; gap: 20px; align-items: flex-start; }
-      .section-title { font-size: 1.5rem; }
-      .hero h1 { font-size: 2rem; }
-      .games-showcase { display: none; }
-    }
+/* Мобильное меню — исправленная версия */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+    z-index: 1002;
+    position: relative;
+  }
+
+  .games-showcase{
+    display: none;
+  }
+  
+  .primary-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: #d10000;
+    border-left: 3px solid #222;
+    padding: 80px 30px 30px 30px;
+    transition: right 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+  }
+  
+  .primary-nav.open {
+    right: 0;
+  }
+  
+  .primary-nav ul {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  
+  .primary-nav a {
+    font-size: 0.8rem;
+  }
+  
+  /* Кнопка ENG внутри меню */
+  .lang-nav-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  /* Крестик внутри меню (дублируем для наглядности) */
+  .close-menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border: 2px solid black;
+    color: black;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: monospace;
+    transition: all 0.2s;
+    z-index: 1003;
+  }
+  
+  .close-menu-btn:hover {
+    transform: scale(1.05);
+    background: #eee;
+  }
+}
+
+/* Мобильный адаптив для видео */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 50px 0;
+  }
+  
+  .about-inner {
+    gap: 30px;
+  }
+  
+  .video-wrapper {
+    border-width: 2px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .video-wrapper iframe,
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Если видео через <video> */
+  .video-wrapper video {
+    object-fit: cover;
+  }
+}
+
+/* Мобильный адаптив для главного проекта */
+@media (max-width: 768px) {
+  .featured-project {
+    padding: 50px 0;
+  }
+  
+  .featured-inner {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .featured-image {
+    min-width: auto;
+    width: 100%;
+    border-width: 3px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .featured-content h2 {
+    font-size: 1.4rem;
+    text-shadow: 2px 2px 0 black;
+  }
+  
+  .featured-content p {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+  
+  .featured-content .btn-read {
+    font-size: 0.6rem;
+    padding: 10px 20px;
+  }
+}
   </style>
 </head>
 <body>
