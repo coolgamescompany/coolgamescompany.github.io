@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Cool Games Company (CGC) — инди-студия, создающая уникальные игровые миры.">
+  <title>Cool Games Company (CGC)</title>
+  <link rel="icon" href="/img/logo.png">
+  <!-- Шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    /* ---------- RESET ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Убираем горизонтальный скролл */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #ffffff;
+      color: #111111;
+      line-height: 1.5;
+      scroll-behavior: smooth; /* плавная прокрутка по якорям */
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 3;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ---------- ПИКСЕЛЬНЫЙ ШРИФТ ДЛЯ АКЦЕНТОВ ---------- */
+    .pixel-text, .logo-text, .section-title span, .hero-tagline, .game-info h3,
+    .news-date, .concept-status, .btn, .platform span, .footer-logo,
+    .primary-nav a, .form-label, .submit-btn {
+      font-family: 'Press Start 2P', 'Inter', monospace;
+      letter-spacing: 0.05em;
+    }
+
+    /* ---------- ТИПОГРАФИКА ---------- */
+    h1, h2, h3, h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 48px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .section-title span {
+      font-size: 1.2rem;
+      background: #111;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+      padding: 0 8px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: #d10000;
+    }
+
+    /* ---------- ПИКСЕЛЬНЫЕ КНОПКИ ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-size: 0.7rem;
+      font-weight: normal;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: none;
+      position: relative;
+      background: #111;
+      color: #fff;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    }
+    .btn-primary {
+      background: #d10000;
+      color: #fff;
+      box-shadow: 4px 4px 0 #6b0000;
+    }
+    .btn-primary:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #6b0000;
+    }
+    .btn-outline {
+      background: #ffffff;
+      border: 2px solid #111;
+      color: #111;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+    }
+    .btn-outline:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    }
+    .btn-read {
+      background: #d10000;
+      border: 2px solid black;
+      color: white;
+      font-size: 0.65rem;
+      padding: 8px 16px;
+      font-family: 'Press Start 2P', monospace;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      box-shadow: 3px 3px 0 rgba(209,0,0,0.4);
+    }
+    .btn-read:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #d10000;
+    }
+
+    /* ---------- ШАПКА (КРАСНАЯ) ---------- */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #d10000;
+      z-index: 1000;
+      border-bottom: 3px solid #222;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+    .logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2));
+    }
+    .primary-nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+    .primary-nav a {
+      font-size: 0.7rem;
+      font-weight: normal;
+      color: #fff;
+      transition: opacity 0.15s;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .primary-nav a:hover {
+      opacity: 0.8;
+      border-bottom-color: #fff;
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 2px solid #fff;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 6px 12px;
+      color: #fff;
+    }
+    /* ENG кнопка внутри навигации (в самом правом краю) */
+    .lang-nav-btn {
+      background: white;
+      color: black;
+      border: 2px solid black;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 8px;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+    }
+    .lang-nav-btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+
+    /* ---------- ГЕРОЙ СО СТАТИЧНЫМ ФОНОМ (оригинальный логотип) ---------- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: #0a0a0a;
+      margin-top: 0;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid #222;
+    }
+    .hero-bg-static {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/img/titanisland_3.jpg'); /* если нет — заглушка */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-logo {
+      max-width: 280px;
+      margin: 0 auto;
+      filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.2));
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin: 16px 0;
+      line-height: 1.2;
+      color: white;
+    }
+    .hero-tagline {
+      color: #d10000;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+    .hero p {
+      color: #ddd;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ---------- ПЛАТФОРМЫ (ЧЁРНАЯ ТЕМА, БЕЛЫЕ ИКОНКИ, ТЕКСТ СКРЫТ) ---------- */
+    .platforms-dark {
+      background: #171717;
+      padding: 28px 0;
+      border-bottom: 2px solid #333;
+      border-top: 2px solid #333;
+    }
+    .platforms-grid-dark {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .platform-dark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: white;
+      transition: transform 0.2s;
+    }
+    .platform-dark i {
+      font-size: 36px;
+      color: white;
+    }
+    .platform-dark span {
+      display: none; /* текст убираем */
+    }
+    .platform-dark:hover {
+      transform: translateY(-4px);
+      opacity: 0.8;
+    }
+
+    /* ---------- СЕКЦИЯ ИГР (ОРИГИНАЛЬНЫЕ КАРТИНКИ) ---------- */
+    .games-showcase {
+      padding: 80px 0;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .games-bg-icon {
+      position: absolute;
+      right: -50px;
+      top: 20%;
+      font-size: 18rem;
+      color: rgba(209,0,0,0.05);
+      transform: rotate(35deg);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .games-container {
+      display: flex;
+      gap: 4px;
+      height: 520px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .game-block {
+      flex: 1;
+      position: relative;
+      border: 2px solid #222;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      cursor: pointer;
+      background: #000;
+    }
+    .game-block:hover { flex: 2.5; }
+    .game-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.4s ease;
+      filter: brightness(0.7) grayscale(0.2);
+    }
+    .game-block:hover .game-bg {
+      transform: scale(1.03);
+      filter: brightness(1) grayscale(0);
+    }
+    .game-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+      transform: translateY(40px);
+      opacity: 0;
+      transition: 0.4s;
+    }
+    .game-block:hover .game-info {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .game-info h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .game-info p {
+      font-size: 0.75rem;
+      margin-bottom: 12px;
+      color: #ccc;
+    }
+    .game-info .btn-read {
+      background: #d10000;
+      color: #fff;
+      border-color: #fff;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+    }
+
+    /* ---------- СЕКЦИЯ "О НАС" ---------- */
+.about-section {
+  padding: 80px 0;
+  background: #ffffff;
+  border-bottom: 2px solid #222;
+}
+
+.about-inner {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-title {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.about-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: #d10000;
+}
+
+.about-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.about-btn {
+  margin-top: 16px;
+  background: #d10000;
+  color: white;
+  border: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+}
+
+.about-video {
+  flex: 1;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border: 4px solid #222;
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.video-wrapper:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 15px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Адаптив */
+@media (max-width: 992px) {
+  .about-inner {
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
+  
+  .about-text {
+    text-align: center;
+  }
+  
+  .about-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .about-btn {
+    margin: 16px auto 0;
+  }
+}
+
+    /* ---------- НОВОСТИ: СТРЕЛКИ ПО БОКАМ (ВНЕ СЛАЙДЕРА) ---------- */
+    .news-section {
+      padding: 80px 0;
+      background: #f8f8f8;
+      border-top: 2px solid #222;
+      border-bottom: 2px solid #222;
+      position: relative;
+    }
+    .news-wrapper {
+      position: relative;
+      padding: 0 60px; /* место для стрелок по бокам */
+    }
+    .swiper {
+      width: 100%;
+      padding: 20px 0 60px;
+    }
+    .swiper-slide {
+      background: #f5f5f5;
+      border: 2px solid #222;
+      overflow: hidden;
+      transition: 0.2s;
+    }
+    .swiper-slide:hover {
+      transform: translate(-2px, -2px);
+    }
+    .news-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 2px solid #222;
+    }
+    .news-content { padding: 20px; }
+    .news-date { color: #d10000; font-size: 0.55rem; margin-bottom: 10px; display: block; }
+    .news-title { font-size: 1.1rem; margin-bottom: 10px; }
+    .news-text { color: #444; margin-bottom: 16px; font-size: 0.85rem; }
+    .swiper-pagination-bullet {
+      background: #222;
+      opacity: 0.5;
+      border-radius: 0;
+      width: 16px;
+      height: 4px;
+    }
+    .swiper-pagination-bullet-active {
+      background: #d10000;
+      opacity: 1;
+      width: 24px;
+    }
+    /* Кастомные стрелки по бокам (абсолютное позиционирование внутри обертки) */
+    .news-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      background: white;
+      border: 2px solid #222;
+      color: #d10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 10;
+      font-size: 20px;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    }
+    .news-nav-btn:hover {
+      background: #d10000;
+      color: white;
+      transform: translateY(-50%) translate(2px, 2px);
+    }
+    .news-prev {
+      left: 0;
+    }
+    .news-next {
+      right: 0;
+    }
+    @media (max-width: 768px) {
+      .news-wrapper {
+        padding: 0 20px;
+      }
+      .news-nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+      }
+    }
+
+    /* ---------- ГЛАВНЫЙ ПРОЕКТ (КРАСНЫЙ ФОН) ---------- */
+    .featured-project {
+      background: #d10000;
+      padding: 80px 0;
+      border-top: 3px solid #222;
+      border-bottom: 3px solid #222;
+    }
+    .featured-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .featured-image {
+      flex: 1.2;
+      min-width: 250px;
+      border: 4px solid #222;
+      box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .featured-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .featured-image:hover img {
+      transform: scale(1.02);
+    }
+    .featured-content {
+      flex: 1;
+      color: white;
+    }
+    .featured-content h2 {
+      font-size: 2.2rem;
+      font-family: 'Press Start 2P', monospace;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 0 black;
+    }
+    .featured-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      color: #ffe0e0;
+    }
+    .featured-content .btn-read {
+      background: white;
+      color: #d10000;
+      border-color: black;
+      box-shadow: 4px 4px 0 black;
+    }
+    .featured-content .btn-read:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 black;
+    }
+
+    /* ---------- ПРОЕКТЫ (КОНЦЕПТЫ) ---------- */
+    .projects {
+      padding: 80px 0;
+      background: #fff;
+    }
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .concept-card {
+      background: #f5f5f5;
+      border: 2px solid #222;
+      overflow: hidden;
+      transition: 0.25s ease;
+      position: relative;
+    }
+    .concept-card:hover {
+      transform: translate(-2px, -2px);
+    }
+    .concept-image {
+      position: relative;
+      height: 180px;
+      overflow: hidden;
+      border-bottom: 2px solid #222;
+    }
+    .concept-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .concept-card:hover .concept-image img { transform: scale(1.05); }
+    .concept-status {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #111;
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 0.5rem;
+      border: 1px solid #fff;
+    }
+    .concept-info { padding: 20px; }
+    .concept-info h4 { font-size: 1.2rem; margin-bottom: 10px; }
+    .concept-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .concept-tags span {
+      background: rgba(209,0,0,0.1);
+      padding: 3px 8px;
+      font-size: 0.6rem;
+      color: #d10000;
+      border: 1px solid #d10000;
+      font-family: 'Press Start 2P', monospace;
+    }
+    .concept-info p { color: #444; font-size: 0.85rem; margin-bottom: 16px; }
+
+    /* ---------- КОНТАКТЫ ---------- */
+    .contact-section {
+      padding: 80px 0;
+      background: #f8f8f8;
+      position: relative;
+      border-top: 2px solid #222;
+    }
+    .contact-form-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border: 2px solid #222;
+      padding: 30px;
+      box-shadow: 8px 8px 0 rgba(0,0,0,0.05);
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-label {
+      display: block;
+      font-size: 0.7rem;
+      margin-bottom: 8px;
+      color: #111;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #222;
+      background: #fff;
+      font-family: 'Inter', monospace;
+      font-size: 0.9rem;
+    }
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: #d10000;
+      box-shadow: 2px 2px 0 rgba(209,0,0,0.4);
+    }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .submit-btn {
+      background: #d10000;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 #6b0000;
+      width: 100%;
+    }
+    .submit-btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #6b0000;
+    }
+    .social-circles {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .social-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      background: #fff;
+      border: 2px solid #222;
+      color: #d10000;
+      font-size: 1.5rem;
+      transition: 0.2s;
+    }
+    .social-circle:hover {
+      background: #d10000;
+      color: #fff;
+      transform: translate(-2px, -2px);
+    }
+    .character-left, .character-right {
+      position: absolute;
+      bottom: 0;
+      width: 140px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .character-left { left: 0; }
+    .character-right { right: 0; }
+
+    /* ---------- ФУТЕР ---------- */
+    .site-footer {
+      background: #d10000;
+      padding: 50px 0 30px;
+      border-top: 3px solid #222;
+      color: white;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-logo {
+      font-size: 1rem;
+      font-weight: normal;
+      margin-bottom: 15px;
+      display: inline-block;
+      background: white;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: white;
+      border: 2px solid white;
+      padding: 4px 8px;
+    }
+    .site-footer ul { list-style: none; }
+    .site-footer li { margin-bottom: 8px; }
+    .site-footer a { color: #f5f5f5; transition: color 0.2s; }
+    .site-footer a:hover { color: lightgray; }
+    .copyright {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #222;
+      font-size: 0.7rem;
+    }
+
+    @media (max-width: 992px) {
+      .games-container { flex-direction: column; height: auto; }
+      .game-block { height: 200px; }
+      .game-block:hover { flex: 1; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .featured-inner { flex-direction: column; text-align: center; }
+      .character-left, .character-right { width: 80px; opacity: 0.2; }
+    }
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      .primary-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: #d10000;
+        border-left: 3px solid #222;
+        padding: 100px 30px;
+        transition: right 0.3s;
+        z-index: 1001;
+      }
+      .primary-nav.open { right: 0; }
+      .primary-nav ul { flex-direction: column; gap: 20px; align-items: flex-start; }
+      .section-title { font-size: 1.5rem; }
+      .hero h1 { font-size: 2rem; }
+      .games-showcase { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="#home"><img src="/img/logo.png" alt="CGC" class="logo-img"></a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+      <nav class="primary-nav" id="primaryNav">
+        <ul>
+          <li><a href="#about">О НАС</a></li>
+          <li><a href="#news">НОВОСТИ</a></li>
+          <li><a href="#projects">ПРОЕКТЫ</a></li>
+          <li><a href="#games">ИГРЫ</a></li>
+          <li><a href="#contact">КОНТАКТЫ</a></li>
+          <li><button class="lang-nav-btn" id="langNavBtn">ENG</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Герой со статичным фоном -->
+    <section id="home" class="hero">
+      <div class="hero-bg-static" style="background-image: url('/img/hero.jpg'); background-size: cover; background-position: center;"></div>
+      <div class="container hero-inner">
+        <div>
+          <img src="/img/logo.png" alt="CGC" class="hero-logo">
+          <div class="hero-tagline">СОЗДАЁМ МИРЫ, КОТОРЫЕ ВДОХНОВЛЯЮТ</div>
+          <h1>Cool Games Company</h1>
+          <p>Независимая инди-студия, создающая уникальные игровые миры и незабываемый опыт с 2020 года. Каждая игра — ручная работа и любовь к деталям.</p>
+          <div class="hero-cta">
+            <a href="#games" class="btn btn-primary">НАШИ ПРОЕКТЫ</a>
+            <a href="#news" class="btn btn-outline">ПОСЛЕДНИЕ НОВОСТИ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Платформы: чёрный фон, белые иконки, текст скрыт -->
+    <div class="platforms-dark">
+      <div class="container platforms-grid-dark">
+        <a href="#" class="platform-dark"><i class="fab fa-steam"></i><span>STEAM</span></a>
+        <a href="#" class="platform-dark"><i class="fab fa-vk"></i><span>VK</span></a>
+        <a href="#" class="platform-dark"><i class="fa-solid fa-dice"></i><span>ITCH.IO</span></a>
+        <a href="#" class="platform-dark"><i class="fab fa-microsoft"></i><span>MICROSOFT</span></a>
+        <a href="#" class="platform-dark"><i class="fa-solid fa-gamepad"></i><span>XBOX</span></a>
+      </div>
+    </div>
+
+    <!-- ИГРЫ (оригинальные пути) -->
+    <section id="games" class="games-showcase">
+      <div class="games-bg-icon"><i class="fas fa-gamepad"></i></div>
+      <div class="container">
+        <h2 class="section-title"><span>НАШИ ИГРЫ</span></h2>
+        <div class="games-container">
+          <div class="game-block"><div class="game-bg" style="background-image: url('/img/dostavisto.jpg')"></div><div class="game-info"><h3>DOSTAVISTO!</h3><p>Киберпанк-экшен с элементами платформера.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></div>
+          <div class="game-block"><div class="game-bg" style="background-image: url('/img/benspunch_card.png')"></div><div class="game-info"><h3>BEN'S PUNCH!</h3><p>Пиксельный платформер с динамичными боями.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></div>
+          <div class="game-block"><div class="game-bg" style="background-image: url('/img/cosmicodyssey_card.png')"></div><div class="game-info"><h3>КОСМИЧЕСКАЯ ОДИССЕЯ</h3><p>Визуальная новелла о выживании в космосе.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></div>
+          <div class="game-block"><div class="game-bg" style="background-image: url('/img/titanisland_card.png')"></div><div class="game-info"><h3>TITAN ISLAND</h3><p>RPG с открытым миром и гигантскими существами.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></div>
+          <div class="game-block"><div class="game-bg" style="background-image: url('/img/demonator_card.png')"></div><div class="game-info"><h3>DEMONATOR</h3><p>Хардкорный шутер с мрачной эстетикой.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></div>
+        </div>
+      </div>
+    </section>
+    <!-- БЛОК "О НАС" -->
+<section id="about" class="about-section">
+  <div class="container about-inner">
+    <div class="about-text">
+      <h2 class="about-title">О НАС</h2>
+      <p class="about-description">
+        Мы — <strong>Cool Games Company</strong>, молодая российская инди-геймдев студия, создающая игры с душой с 2020 года. 
+        Наша команда — это энтузиасты, которые горят идеей делать уникальные игровые миры и делиться ими с игроками по всему миру.
+      </p>
+      <p class="about-description">
+        Мы всегда открыты для новых талантов! Если вы чувствуете в себе силы, хотите попробовать себя в геймдеве или просто готовы помочь 
+        проекту — присоединяйтесь к нам. Добровольцы, тестировщики, 2D/3D художники, сценаристы — мы ждём именно вас!
+      </p>
+      <a href="#contact" class="btn btn-primary about-btn">МНЕ ИНТЕРЕСНО!</a>
+    </div>
+    <div class="about-video">
+      <div class="video-wrapper">
+<iframe width="720" height="405" src="https://rutube.ru/play/embed/5bfcb79b662a4dd48f4729eede0f2d2b/?skinColor=e53935" style="border: none;" allow="clipboard-write; autoplay" allowFullScreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- НОВОСТИ: стрелки по бокам -->
+    <section id="news" class="news-section">
+      <div class="container">
+        <h2 class="section-title"><span>СВЕЖИЕ НОВОСТИ</span></h2>
+        <div class="news-wrapper">
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="/img/demonator_5.jpg" class="news-img" alt="news"><div class="news-content"><span class="news-date">15 МАРТА, 2025</span><h3 class="news-title">Бета-тест Demonator</h3><p class="news-text">Присоединяйтесь к Discord серверу, чтобы получить ключ доступа к первой главе игры.</p><a href="#" class="btn-read">ЧИТАТЬ ДАЛЬШЕ →</a></div></div>
+              <div class="swiper-slide"><img src="/img/titanisland_card.png" class="news-img" alt="news"><div class="news-content"><span class="news-date">28 ФЕВРАЛЯ, 2025</span><h3 class="news-title">Анонс Titan Island</h3><p class="news-text">Новый проект с открытым миром и уникальной экосистемой выходит в ранний доступ.</p><a href="#" class="btn-read">ЧИТАТЬ ДАЛЬШЕ →</a></div></div>
+              <div class="swiper-slide"><img src="/img/benspunch_card.png" class="news-img" alt="news"><div class="news-content"><span class="news-date">10 ФЕВРАЛЯ, 2025</span><h3 class="news-title">Интервью с разработчиками</h3><p class="news-text">Эксклюзивное интервью: как создавался Ben's Punch! и что нас вдохновляет.</p><a href="#" class="btn-read">ЧИТАТЬ ДАЛЬШЕ →</a></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <div class="news-nav-btn news-prev" id="newsPrev"><i class="fas fa-chevron-left"></i></div>
+          <div class="news-nav-btn news-next" id="newsNext"><i class="fas fa-chevron-right"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ГЛАВНЫЙ ПРОЕКТ -->
+    <section class="featured-project">
+      <div class="container featured-inner">
+        <div class="featured-image">
+          <img src="/img/dostavisto.jpg" alt="DOSTAVISTO! Главный проект">
+        </div>
+        <div class="featured-content">
+          <h2>DOSTAVISTO!</h2>
+          <p>Главный проект студии — киберпанк-экшен с уникальной механикой доставки в мире будущего. Исследуйте мегаполис, сражайтесь с корпорациями и станьте легендой подпольной доставки. Огромный открытый мир, динамичные погони и пиксельная эстетика.</p>
+          <a href="#" class="btn-read">УЗНАТЬ БОЛЬШЕ →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРОЕКТЫ -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <h2 class="section-title"><span>КОНЦЕПТЫ И ПЛАНЫ</span></h2>
+        <div class="concepts-grid">
+          <article class="concept-card"><div class="concept-image"><img src="/img/dostavisto.jpg"><span class="concept-status">В РАЗРАБОТКЕ</span></div><div class="concept-info"><h4>DOSTAVISTO!</h4><div class="concept-tags"><span>АРКАДА</span><span>2D</span></div><p>Попробуйте себя в роли хардкорного доставщика еды в заМКАДье.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></article>
+          <article class="concept-card"><div class="concept-image"><img src="/img/benspunch_card.png"><span class="concept-status">В ПЛАНАХ</span></div><div class="concept-info"><h4>Ben's Punch!</h4><div class="concept-tags"><span>ПЛАТФОРМЕР</span><span>ПИКСЕЛЬ</span></div><p>Бывшая легенда бокса восстанавливает свой авторитет</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></article>
+          <article class="concept-card"><div class="concept-image"><img src="/img/cosmicodyssey_card.png"><span class="concept-status">В ПЛАНАХ</span></div><div class="concept-info"><h4>Игры Вселенной</h4><div class="concept-tags"><span>ВН</span><span>КОСМОС</span></div><p>Школьная олимпиада стала нечто большим...</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></article>
+          <article class="concept-card"><div class="concept-image"><img src="/img/titanisland_card.png"><span class="concept-status">КОНЦЕПТ</span></div><div class="concept-info"><h4>Titan Island</h4><div class="concept-tags"><span>RPG</span><span>ОТКРЫТЫЙ МИР</span></div><p>Выживание и взаимодействие с гигантскими существами.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></article>
+          <article class="concept-card"><div class="concept-image"><img src="/img/demonator_card.png"><span class="concept-status">В ПЛАНАХ</span></div><div class="concept-info"><h4>Demonator</h4><div class="concept-tags"><span>ШУТЕР</span><span>3D</span></div><p>Демоны, технологии и городские локации.</p><a href="#" class="btn-read">ПОДРОБНЕЕ →</a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2 class="section-title"><span>СВЯЖИТЕСЬ С НАМИ</span></h2>
+        <div class="contact-form-wrapper">
+          <form action="#" method="post">
+            <div class="form-group"><label class="form-label">ВАШЕ ИМЯ</label><input type="text" class="form-input" placeholder="Иван Иванов" required></div>
+            <div class="form-group"><label class="form-label">EMAIL</label><input type="email" class="form-input" placeholder="hello@example.com" required></div>
+            <div class="form-group"><label class="form-label">СООБЩЕНИЕ</label><textarea class="form-textarea" placeholder="Расскажите о вашей идее или вопросе..."></textarea></div>
+            <button type="submit" class="submit-btn">ОТПРАВИТЬ →</button>
+          </form>
+        </div>
+        <div class="social-circles">
+          <a href="#" class="social-circle"><i class="fab fa-discord"></i></a>
+          <a href="#" class="social-circle"><i class="fab fa-steam"></i></a>
+          <a href="#" class="social-circle"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-circle"><i class="fab fa-vk"></i></a>
+        </div>
+      </div>
+      <img src="/img/character-left.png" class="character-left" alt="Спрайт">
+      <img src="/img/character-right.png" class="character-right" alt="Спрайт">
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><div class="footer-logo">CGC</div><p>Создаём миры, которые вдохновляют. С 2020 года на страже качественного инди-геймдева.</p></div>
+      <div><h4>НАВИГАЦИЯ</h4><ul><li><a href="#about">О нас</a></li><li><a href="#games">Игры</a></li><li><a href="#news">Новости</a></li></ul></div>
+      <div><h4>РЕСУРСЫ</h4><ul><li><a href="#">Пресс-кит</a></li><li><a href="#">Вакансии</a></li><li><a href="#">Политика</a></li></ul></div>
+    </div>
+    <div class="copyright">© 2025 COOL GAMES COMPANY. ВСЕ ПРАВА ЗАЩИЩЕНЫ. СДЕЛАНО С ЛЮБОВЬЮ К ПИКСЕЛЯМ.</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const nav = document.getElementById('primaryNav');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      toggle.innerHTML = nav.classList.contains('open') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    const swiper = new Swiper('.mySwiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: false,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      breakpoints: { 768: { slidesPerView: 2, spaceBetween: 20 } }
+    });
+    document.getElementById('newsPrev').addEventListener('click', () => swiper.slidePrev());
+    document.getElementById('newsNext').addEventListener('click', () => swiper.slideNext());
+    document.getElementById('langNavBtn').addEventListener('click', () => alert('Language switched (demo)'));
+  </script>
+</body>
+</html>
